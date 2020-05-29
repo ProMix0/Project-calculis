@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Server.csproj",
-      "projectName": "Server",
-      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Database.csproj",
+      "projectName": "Database",
+      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Database.csproj",
       "packagesPath": "C:\\Users\\Миша\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\obj\\",
       "projectStyle": "PackageReference",

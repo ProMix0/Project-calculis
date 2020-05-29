@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vfbaOCcqt0/gXcfOTyNVzg2jYmK71JlfRC/OkiN26iBA1FLeak3BkFiiF3eA6+hH3ik8v6a2zprgOg9dLjJCbQ==",
+  "dgSpecHash": "ClaXcFRRt5/2SraeVsyZVdqquxE+ACVEvsB8FNDRDgu/iAh4I7tYxlz+hqy899yUHVUmt9rfCqaVm4T91+iZHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Server.csproj",
+  "projectFilePath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Project-calculis\\Database.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
