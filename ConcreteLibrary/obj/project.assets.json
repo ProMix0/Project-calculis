@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\AbstractClasses\\AbstractLibrary.csproj",
-      "projectName": "AbstractLibrary",
-      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\AbstractClasses\\AbstractLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\ConcreteLibrary\\ConcreteLibrary.csproj",
+      "projectName": "ConcreteLibrary",
+      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\ConcreteLibrary\\ConcreteLibrary.csproj",
       "packagesPath": "C:\\Users\\Миша\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\AbstractClasses\\obj\\",
+      "outputPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\ConcreteLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Миша\\AppData\\Roaming\\NuGet\\NuGet.Config",

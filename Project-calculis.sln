@@ -13,9 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractClasses", "AbstractClasses\AbstractClasses.csproj", "{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractLibrary", "AbstractClasses\AbstractLibrary.csproj", "{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxy", "Proxy\Proxy.csproj", "{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcreteLibrary", "ConcreteLibrary\ConcreteLibrary.csproj", "{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
