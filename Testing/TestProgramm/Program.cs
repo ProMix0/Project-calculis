@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Reflection;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace TestProgramm
 {
     class Program
     {
-        static void Main(string[] args)
+
+        [Serializable]
+        class Example
         {
+            public string Field;
+        }
+
+        static void Main(string[] args)
+        {/*
             Assembly asm;
 
             using (BinaryReader reader = new BinaryReader(File.Open(@"C:\Users\Миша\source\repos\Project-calculis\TestLibrary\bin\Debug\netcoreapp3.1\TestLibrary.dll", FileMode.Open)))
@@ -28,7 +36,15 @@ namespace TestProgramm
             // вызываем метод, передаем ему значения для параметров и получаем результат
             object result = method.Invoke(obj, new object[] { 2 });
             Console.WriteLine((result));
-            Console.Read();
+            Console.Read();*/
+
+            Formatter formatter = new Formatter();
+            Stream stream = new Stream();
+            Example example1 = new Example("ghghh");
+            formatter.Serialize(stream, example1);
+            Example example2 = (Example)formatter.Deserialize(stream);
+            Console.WriteLine(example2.Field);
+            Console.ReadKey();
         }
     }
 }
