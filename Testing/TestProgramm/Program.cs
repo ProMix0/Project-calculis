@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.IO;
-using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TestProgramm
 {
@@ -12,6 +12,11 @@ namespace TestProgramm
         class Example
         {
             public string Field;
+
+            public Example(string field)
+            {
+                this.Field = field;
+            }
         }
 
         static void Main(string[] args)
@@ -38,10 +43,13 @@ namespace TestProgramm
             Console.WriteLine((result));
             Console.Read();*/
 
-            Formatter formatter = new Formatter();
-            Stream stream = new Stream();
-            Example example1 = new Example("ghghh");
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream stream = new MemoryStream();
+            Example example1 = new Example("Serialization serialize text from string");
             formatter.Serialize(stream, example1);
+            example1=null;
+            GC.Collect();
+            stream.Position = 0;
             Example example2 = (Example)formatter.Deserialize(stream);
             Console.WriteLine(example2.Field);
             Console.ReadKey();

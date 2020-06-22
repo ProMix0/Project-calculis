@@ -7,3 +7,12 @@ C:\Users\Миша\source\repos\Project-calculis\TestLibrary\obj\Debug\netcoreapp
 C:\Users\Миша\source\repos\Project-calculis\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.AssemblyInfo.cs
 C:\Users\Миша\source\repos\Project-calculis\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.dll
 C:\Users\Миша\source\repos\Project-calculis\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\bin\Debug\netcoreapp3.1\TestLibrary.deps.json
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\bin\Debug\netcoreapp3.1\TestLibrary.dll
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\bin\Debug\netcoreapp3.1\TestLibrary.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.csprojAssemblyReference.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.AssemblyInfoInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.AssemblyInfo.cs
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.csproj.CoreCompileInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.dll
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestLibrary\obj\Debug\netcoreapp3.1\TestLibrary.pdb

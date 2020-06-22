@@ -14,3 +14,19 @@ C:\Users\Миша\source\repos\Project-calculis\TestProgramm\obj\Debug\netcoreap
 C:\Users\Миша\source\repos\Project-calculis\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.dll
 C:\Users\Миша\source\repos\Project-calculis\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.pdb
 C:\Users\Миша\source\repos\Project-calculis\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.genruntimeconfig.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csprojAssemblyReference.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.AssemblyInfoInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.AssemblyInfo.cs
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csproj.CoreCompileInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.dll
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.exe
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.deps.json
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.runtimeconfig.json
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.runtimeconfig.dev.json
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.dll
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestLibrary.dll
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestLibrary.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csproj.CopyComplete
+C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.genruntimeconfig.cache
