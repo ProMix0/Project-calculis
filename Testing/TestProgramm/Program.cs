@@ -11,9 +11,9 @@ namespace TestProgramm
         [Serializable]
         class Example
         {
-            public string Field;
+            public byte[] Field;
 
-            public Example(string field)
+            public Example(byte[] field)
             {
                 this.Field = field;
             }
@@ -45,11 +45,12 @@ namespace TestProgramm
 
             BinaryFormatter formatter = new BinaryFormatter();
             Stream stream = new MemoryStream();
-            Example example1 = new Example("Serialization serialize text from string");
+            Example example1 = new Example(new byte[2]);
             formatter.Serialize(stream, example1);
             example1=null;
             GC.Collect();
             stream.Position = 0;
+            Console.WriteLine(stream.Length);
             Example example2 = (Example)formatter.Deserialize(stream);
             Console.WriteLine(example2.Field);
             Console.ReadKey();
