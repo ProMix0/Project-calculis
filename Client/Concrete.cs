@@ -11,7 +11,7 @@ namespace Client
 
         private Work Work;
 
-        public override byte[] ExecuteCurrentWork(byte[] workSeed, string path)
+        public override byte[] ExecuteWork(byte[] workSeed, string path)
         {
             path= Path.Combine(Environment.CurrentDirectory, path);
             using (var stream= new FileStream(path, FileMode.Open))

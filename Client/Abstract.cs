@@ -62,7 +62,7 @@ namespace Client
 
         public readonly Client Client;
 
-        public abstract byte[] ExecuteCurrentWork(byte[] workSeed, string path);
+        public abstract byte[] ExecuteWork(byte[] workSeed, string path);
 
     }
 }
