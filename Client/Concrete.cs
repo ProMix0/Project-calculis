@@ -18,20 +18,7 @@ namespace Client
 
         public override byte[] Receive()
         {
-            byte[] result = new byte[0];
-            byte[] buffer = new byte[256];
-            int readed;
-            int index = 0;
-            while ((readed = this.reader.Read(buffer, index, buffer.Length)) == 256)
-            {
-                index+=buffer.Length;
-                Array.Resize(ref result, result.Length + buffer.Length);
-                for(int i = 0;i<buffer.Length;i++)
-                {
-                    result[i+result.Length-buffer.Length] = buffer[i];
-                }
-            }
-            return result;
+            return this.reader.ReadBytes(this.client.Available);
         }
         
         public override void Open(string ip, int port)
