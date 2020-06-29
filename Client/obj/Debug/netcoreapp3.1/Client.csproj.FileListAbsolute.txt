@@ -1,0 +1,4 @@
+C:\PABCWork.NET\Project of year\Project-calculis\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfoInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfo.cs
+C:\PABCWork.NET\Project of year\Project-calculis\Client\obj\Debug\netcoreapp3.1\Client.csproj.CoreCompileInputs.cache

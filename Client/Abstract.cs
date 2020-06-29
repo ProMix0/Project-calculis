@@ -3,9 +3,9 @@ namespace Client
     public abstract class Client
     {
 
-        public readonly RemoteProxy RemoteProxy;
+        public RemoteProxy RemoteProxy;
 
-        public readonly WorkManager WorkManager;
+        public WorkManager WorkManager;
 
     }
 
@@ -14,18 +14,16 @@ namespace Client
 
         public readonly Client Client;
 
-        public readonly Security Security;
+        public Security Security;
 
-        public readonly ProjectEncoding ProjectEncoding;
+        public ProjectEncoding ProjectEncoding;
 
-        public readonly Connection Connection;
+        public Connection Connection;
 
     }
 
     public abstract class Security
     {
-
-        public readonly Client Client;
 
         public readonly RemoteProxy RemoteProxy;
 
@@ -34,8 +32,6 @@ namespace Client
     public abstract class ProjectEncoding
     {
 
-        public readonly Client Client;
-
         public readonly RemoteProxy RemoteProxy;
 
     }
@@ -43,17 +39,17 @@ namespace Client
     public abstract class Connection
     {
 
-        public readonly Client Client;
-
         public readonly RemoteProxy RemoteProxy;
 
         public bool IsOpen{get; private set;}
 
-        public byte[] Received {get; private set;}
+        public abstract byte[] Receive();
 
-        public abstract bool Open(string ip, int port);
+        public abstract void Open(string ip, int port);
 
         public abstract void Close();
+
+        public abstract void Send(byte[] message);
 
     }
 

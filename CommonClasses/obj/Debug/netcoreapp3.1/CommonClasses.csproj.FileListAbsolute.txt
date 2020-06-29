@@ -1,0 +1,9 @@
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.csprojAssemblyReference.cache
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.AssemblyInfoInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.AssemblyInfo.cs
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.csproj.CoreCompileInputs.cache
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\bin\Debug\netcoreapp3.1\CommonClasses.deps.json
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\bin\Debug\netcoreapp3.1\CommonClasses.dll
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\bin\Debug\netcoreapp3.1\CommonClasses.pdb
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.dll
+C:\PABCWork.NET\Project of year\Project-calculis\CommonClasses\obj\Debug\netcoreapp3.1\CommonClasses.pdb
