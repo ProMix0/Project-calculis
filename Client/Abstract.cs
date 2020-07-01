@@ -9,6 +9,8 @@ namespace Client
     public abstract class Client
     {
 
+        #region Properties
+
         public RemoteProxy RemoteProxy 
         {
             get
@@ -45,6 +47,12 @@ namespace Client
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        #endregion
+
     }
 
     /// <summary>
@@ -52,6 +60,8 @@ namespace Client
     /// </summary>
     public abstract class RemoteProxy
     {
+
+        #region Properties
 
         public  Client Client 
         {
@@ -107,6 +117,12 @@ namespace Client
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        #endregion
+
     }
 
     /// <summary>
@@ -114,6 +130,8 @@ namespace Client
     /// </summary>
     public abstract class ProjectEncoding
     {
+
+        #region Properties
 
         public RemoteProxy RemoteProxy 
         {
@@ -132,6 +150,12 @@ namespace Client
 
             }
         }
+
+        #endregion
+
+        #region Methods
+
+        #endregion
 
     }
 
@@ -141,6 +165,8 @@ namespace Client
     public abstract class Connection
     {
 
+        #region Properties
+
         public RemoteProxy RemoteProxy 
         {
             get
@@ -159,7 +185,11 @@ namespace Client
             }
         }
 
-        public bool IsOpen{get; private set;}
+        #endregion
+
+        #region Methods
+
+        public abstract bool IsOpen();
 
         public abstract byte[] Receive();
 
@@ -169,6 +199,8 @@ namespace Client
 
         public abstract void Send(byte[] message);
 
+        #endregion
+
     }
 
     /// <summary>
@@ -176,6 +208,8 @@ namespace Client
     /// </summary>
     public abstract class WorkManager
     {
+
+        #region Properties
 
         public  Client Client 
         {
@@ -195,7 +229,13 @@ namespace Client
             }
         }
 
+        #endregion
+
+        #region Methods
+
         public abstract byte[] ExecuteWork(byte[] workSeed, string path);
+
+        #endregion
 
     }
 }

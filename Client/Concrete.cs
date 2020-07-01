@@ -14,9 +14,15 @@ namespace Client
     /// </summary>
     public class ConcreteClient:Client
     {
-        
-        
 
+        #region Properties
+
+        #endregion
+
+        #region Methods
+
+        #endregion
+        
     }
 
     /// <summary>
@@ -25,7 +31,13 @@ namespace Client
     public class ConcreteRemoteProxy:RemoteProxy
     {
 
-        
+        #region Properties
+
+        #endregion
+
+        #region Methods
+
+        #endregion
 
     }
 
@@ -35,7 +47,13 @@ namespace Client
     public class RSAProjectEncoding:ProjectEncoding
     {
 
-        
+        #region Properties
+
+        #endregion
+
+        #region Methods
+
+        #endregion
 
     }
 
@@ -45,6 +63,8 @@ namespace Client
     public class TCPConnection:Connection
     {
 
+        #region Properties
+
         private IPEndPoint[] ProxyAdresses;
 
         private int adressNumber;
@@ -52,6 +72,17 @@ namespace Client
         private Stream stream;
         private BinaryReader reader;
         private BinaryWriter writer;
+
+        #endregion
+
+        #region Methods
+
+        public override bool IsOpen()
+        {
+
+            return this.client.Connected;
+
+        }
 
         private IPEndPoint GetProxyAdress()
         {
@@ -103,6 +134,8 @@ namespace Client
 
         }
 
+        #endregion
+
     }
 
     /// <summary>
@@ -111,7 +144,13 @@ namespace Client
     public class ConcreteWorkManager:WorkManager
     {
 
+        #region Properties
+
         private Work Work;
+
+        #endregion
+
+        #region Methods
 
         public override byte[] ExecuteWork(byte[] workSeed, string path)
         {
@@ -127,6 +166,8 @@ namespace Client
             MethodInfo method = type.GetMethod("ExecuteWork");
             return (byte[])method.Invoke(obj, new object[]{workSeed});
         }
+
+        #endregion
 
     }
 }
