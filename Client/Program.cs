@@ -14,6 +14,20 @@ namespace Client
         [STAThread]
         static void Main()
         {
+            Client client = new ConcreteClient();
+
+            client.WorkManager = new ConcreteWorkManager();
+            client.WorkManager.Client = client;
+
+            client.RemoteProxy = new ConcreteRemoteProxy();
+            client.RemoteProxy.Client = client;
+
+            client.RemoteProxy.Connection = new TCPConnection();
+            client.RemoteProxy.Connection.RemoteProxy = client.RemoteProxy;
+
+            client.RemoteProxy.ProjectEncoding = new RSAProjectEncoding();
+            client.RemoteProxy.ProjectEncoding.RemoteProxy = client.RemoteProxy;
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
