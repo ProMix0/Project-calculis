@@ -9,29 +9,29 @@ using System.Net;
 namespace Client
 {
 
+    /// <summary>
+    ///  Класс, связывающий остальные классы
+    /// </summary>
     public class ConcreteClient:Client
     {
         
-        public ConcreteClient(RemoteProxy proxy, WorkManager workManager, ProtocolController protocolController)
-            :base(proxy, workManager, protocolController)
-            {}
+        
 
     }
 
-    public class TCPRemoteProxy:RemoteProxy
+    /// <summary>
+    ///  Класс, объединяющий функционал общения с сервером
+    /// </summary>
+    public class ConcreteRemoteProxy:RemoteProxy
     {
 
-        public TCPRemoteProxy(ProjectEncoding projectEncoding, Connection connection)
-            :base(projectEncoding, connection)
-            {}
+        
 
     }
 
-    public class ConcreteProtocolController:ProtocolController
-    {
-
-    }
-
+    /// <summary>
+    ///  Класс, шифрующий канал связи по алгоритму RSA
+    /// </summary>
     public class RSAProjectEncoding:ProjectEncoding
     {
 
@@ -39,6 +39,9 @@ namespace Client
 
     }
 
+    /// <summary>
+    ///  Класс, отвечающий за передачу данных с помощью протокола TCP
+    /// </summary>
     public class TCPConnection:Connection
     {
 
@@ -102,6 +105,9 @@ namespace Client
 
     }
 
+    /// <summary>
+    ///  Класс, выполняющий вычисления
+    /// </summary>
     public class ConcreteWorkManager:WorkManager
     {
 
