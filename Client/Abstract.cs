@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace Client
 {
     public abstract class Client
@@ -7,45 +9,67 @@ namespace Client
 
         public WorkManager WorkManager;
 
+        public ProtocolController ProtocolController;
+
+        public Client(RemoteProxy proxy, WorkManager workManager, ProtocolController protocolController)
+        {
+
+            this.RemoteProxy = proxy;
+            this.RemoteProxy.Client = this;
+            this.WorkManager = workManager;
+            this.WorkManager.Client = this;
+            this.ProtocolController = protocolController;
+            this.ProtocolController.Client = this;
+
+        }
+
     }
 
     public abstract class RemoteProxy
     {
 
-        public readonly Client Client;
-
-        public Security Security;
+        public Client Client;
 
         public ProjectEncoding ProjectEncoding;
 
         public Connection Connection;
 
+        public RemoteProxy(ProjectEncoding projectEncoding, Connection connection)
+        {
+
+            this.ProjectEncoding = projectEncoding;
+            this.ProjectEncoding.RemoteProxy = this;
+            this.Connection = connection;
+            this.Connection.RemoteProxy = this;
+
+        }
+
     }
 
-    public abstract class Security
+    public abstract class ProtocolController
     {
 
-        public readonly RemoteProxy RemoteProxy;
+        public Client Client;
 
     }
 
     public abstract class ProjectEncoding
     {
 
-        public readonly RemoteProxy RemoteProxy;
+        public RemoteProxy RemoteProxy;
 
     }
 
     public abstract class Connection
     {
 
-        public readonly RemoteProxy RemoteProxy;
+        public RemoteProxy RemoteProxy;
 
         public bool IsOpen{get; private set;}
 
         public abstract byte[] Receive();
 
-        public abstract void Open(string ip, int port);
+        public abstract void ConnectProxy();
 
         public abstract void Close();
 
@@ -56,7 +80,7 @@ namespace Client
     public abstract class WorkManager
     {
 
-        public readonly Client Client;
+        public Client Client;
 
         public abstract byte[] ExecuteWork(byte[] workSeed, string path);
 
