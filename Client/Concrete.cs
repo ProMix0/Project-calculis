@@ -4,26 +4,72 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection;
 using System.Net.Sockets;
+using System.Net;
 
 namespace Client
 {
 
+    public class ConcreteClient:Client
+    {
+        
+        public ConcreteClient(RemoteProxy proxy, WorkManager workManager, ProtocolController protocolController)
+            :base(proxy, workManager, protocolController)
+            {}
+
+    }
+
+    public class TCPRemoteProxy:RemoteProxy
+    {
+
+        public TCPRemoteProxy(ProjectEncoding projectEncoding, Connection connection)
+            :base(projectEncoding, connection)
+            {}
+
+    }
+
+    public class ConcreteProtocolController:ProtocolController
+    {
+
+    }
+
+    public class RSAProjectEncoding:ProjectEncoding
+    {
+
+        
+
+    }
+
     public class TCPConnection:Connection
     {
 
+        private IPEndPoint[] ProxyAdresses;
+
+        private int adressNumber;
         private TcpClient client;
         private Stream stream;
         private BinaryReader reader;
         private BinaryWriter writer;
 
+        private IPEndPoint GetProxyAdress()
+        {
+
+            this.adressNumber++;
+            if (this.adressNumber >= this.ProxyAdresses.Length)
+            {
+                this.adressNumber = 0;
+            }
+            return this.ProxyAdresses[this.adressNumber];
+
+        }
+
         public override byte[] Receive()
         {
-            return this.reader.ReadBytes(this.client.Available);
+            return this.reader.ReadBytes((int)this.stream.Length);
         }
         
-        public override void Open(string ip, int port)
-        {//TODO Connection to some count of proxy
-            this.client = new TcpClient(ip, port);
+        public override void ConnectProxy()
+        {
+            this.client.Connect(this.GetProxyAdress());
             this.stream = client.GetStream();
             this.reader = new BinaryReader(this.stream);
             this.writer = new BinaryWriter(this.stream);
@@ -45,6 +91,13 @@ namespace Client
         {
             this.writer.Write(message);
             this.writer.Flush();
+        }
+
+        public TCPConnection()
+        {
+
+            this.client = new TcpClient();
+
         }
 
     }
