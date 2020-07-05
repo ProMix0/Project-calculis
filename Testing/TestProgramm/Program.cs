@@ -2,12 +2,13 @@
 using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 
 namespace TestProgramm
 {
     class Program
     {
-
+        /*
         [Serializable]
         class Example
         {
@@ -18,6 +19,7 @@ namespace TestProgramm
                 this.Field = field;
             }
         }
+        */
 
         static void Main(string[] args)
         {/*
@@ -41,8 +43,11 @@ namespace TestProgramm
             // вызываем метод, передаем ему значения для параметров и получаем результат
             object result = method.Invoke(obj, new object[] { 2 });
             Console.WriteLine((result));
-            Console.Read();*/
+            Console.Read();
+            */
 
+
+            /*
             BinaryFormatter formatter = new BinaryFormatter();
             Stream stream = new MemoryStream();
             Example example1 = new Example(new byte[2]);
@@ -54,6 +59,16 @@ namespace TestProgramm
             Example example2 = (Example)formatter.Deserialize(stream);
             Console.WriteLine(example2.Field);
             Console.ReadKey();
+            */
+
+
+            Console.WriteLine("Creating");
+            var rsa = new RSACryptoServiceProvider();
+            Console.WriteLine("Export");
+            RSAParameters parameters = rsa.ExportParameters(false);
+            Console.WriteLine("After export");
+            Console.ReadKey();
+
         }
     }
 }
