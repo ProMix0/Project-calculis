@@ -25,8 +25,8 @@ namespace Client
             client.RemoteProxy.Connection = new TCPConnection();
             client.RemoteProxy.Connection.RemoteProxy = client.RemoteProxy;
 
-            client.RemoteProxy.ProjectEncoding = new RSAProjectEncoding();
-            client.RemoteProxy.ProjectEncoding.RemoteProxy = client.RemoteProxy;
+            client.RemoteProxy.ProjectCryptography = new RSAProjectCryptography();
+            client.RemoteProxy.ProjectCryptography.RemoteProxy = client.RemoteProxy;
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

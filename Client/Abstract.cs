@@ -1,20 +1,20 @@
-using System.Net;
+using System;
 
 namespace Client
 {
 
     /// <summary>
-    ///  Абстрактный класс, связывающий остальные классы
+    ///  Абстрактный класс, связывающий остальные классы и отвечающий за протоколы
     /// </summary>
     public abstract class Client
     {
 
         #region Properties
 
-        public RemoteProxy RemoteProxy 
+        public RemoteProxy RemoteProxy
         {
             get
-            {return RemoteProxy;} 
+            { return RemoteProxy; }
 
             set
             {
@@ -29,10 +29,10 @@ namespace Client
             }
         }
 
-        public WorkManager WorkManager 
+        public WorkManager WorkManager
         {
             get
-            {return WorkManager;} 
+            { return WorkManager; }
 
             set
             {
@@ -63,10 +63,10 @@ namespace Client
 
         #region Properties
 
-        public  Client Client 
+        public Client Client
         {
             get
-            {return Client;} 
+            { return Client; }
 
             set
             {
@@ -81,17 +81,17 @@ namespace Client
             }
         }
 
-        public  ProjectEncoding ProjectEncoding 
+        public ProjectCryptography ProjectCryptography
         {
             get
-            {return ProjectEncoding;} 
+            { return ProjectCryptography; }
 
             set
             {
 
-                if (ProjectEncoding == null)
+                if (ProjectCryptography == null)
                 {
-                    ProjectEncoding = value;
+                    ProjectCryptography = value;
                     return;
                 }
                 throw new System.Exception();
@@ -99,10 +99,10 @@ namespace Client
             }
         }
 
-        public  Connection Connection 
+        public Connection Connection
         {
             get
-            {return Connection;} 
+            { return Connection; }
 
             set
             {
@@ -128,15 +128,15 @@ namespace Client
     /// <summary>
     ///  Абстрактный класс, отвечающий за шифрование канала связи
     /// </summary>
-    public abstract class ProjectEncoding
+    public abstract class ProjectCryptography
     {
 
         #region Properties
 
-        public RemoteProxy RemoteProxy 
+        public RemoteProxy RemoteProxy
         {
             get
-            {return RemoteProxy;} 
+            { return RemoteProxy; }
 
             set
             {
@@ -154,6 +154,31 @@ namespace Client
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///  Метод, возвращающий состояние соединения
+        /// </summary>
+        public abstract bool IsOpen();
+
+        /// <summary>
+        ///  Метод, открывающий зашифрованный канал связи
+        /// </summary>
+        public abstract void Open();
+
+        /// <summary>
+        ///  Метод, закрывающий зашифрованный канал связи
+        /// </summary>
+        public abstract void Close();
+
+        /// <summary>
+        ///  Метод, посылающий сообщение
+        /// </summary>
+        public abstract void Send(byte[] message);
+
+        /// <summary>
+        ///  Метод, принимающий сообщение
+        /// </summary>
+        public abstract byte[] Receive();
 
         #endregion
 
@@ -167,10 +192,10 @@ namespace Client
 
         #region Properties
 
-        public RemoteProxy RemoteProxy 
+        public RemoteProxy RemoteProxy
         {
             get
-            {return RemoteProxy;} 
+            { return RemoteProxy; }
 
             set
             {
@@ -189,14 +214,29 @@ namespace Client
 
         #region Methods
 
+        /// <summary>
+        ///  Метод, возвращающий состояние соединения
+        /// </summary>
         public abstract bool IsOpen();
 
+        /// <summary>
+        ///  Метод, возвращающий ответ сервера
+        /// </summary>
         public abstract byte[] Receive();
 
-        public abstract void ConnectProxy();
+        /// <summary>
+        ///  Метод, устанавливающий соединение с сервером
+        /// </summary>
+        public abstract void Open();
 
+        /// <summary>
+        ///  Метод, закрывающий соединение с сервером
+        /// </summary>
         public abstract void Close();
 
+        /// <summary>
+        ///  Метод, отправляющий сообщение серверу
+        /// </summary>
         public abstract void Send(byte[] message);
 
         #endregion
@@ -211,10 +251,10 @@ namespace Client
 
         #region Properties
 
-        public  Client Client 
+        public Client Client
         {
             get
-            {return Client;} 
+            { return Client; }
 
             set
             {
@@ -233,6 +273,9 @@ namespace Client
 
         #region Methods
 
+        /// <summary>
+        ///  Метод, запускающий вычисления
+        /// </summary>
         public abstract byte[] ExecuteWork(byte[] workSeed, string path);
 
         #endregion
