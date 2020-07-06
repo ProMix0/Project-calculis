@@ -171,7 +171,7 @@ namespace Client
 
             using (var rsa = new RSACryptoServiceProvider())
             {
-                rsa.ImportParameters(this.publicKey);
+                rsa.ImportParameters(this.privateKey);
                 return rsa.Decrypt(message, false);
             }
 
