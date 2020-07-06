@@ -27,22 +27,6 @@ namespace Client
     }
 
     /// <summary>
-    ///  Класс, объединяющий функционал общения с сервером
-    /// </summary>
-    public class ConcreteRemoteProxy : RemoteProxy
-    {
-
-        #region Properties
-
-        #endregion
-
-        #region Methods
-
-        #endregion
-
-    }
-
-    /// <summary>
     ///  Класс, не шифрующий канал связи
     /// </summary>
     public class NoneProjectCryptography : ProjectCryptography
@@ -59,14 +43,14 @@ namespace Client
         public override void Open()
         {
 
-            this.RemoteProxy.Connection.Open();
+            this.Connection.Open();
 
         }
 
         public override void Close()
         {
 
-            this.RemoteProxy.Connection.Close();
+            this.Connection.Close();
 
         }
 
@@ -80,14 +64,14 @@ namespace Client
         public override void Send(byte[] message)
         {
 
-            this.RemoteProxy.Connection.Send(message);
+            this.Connection.Send(message);
 
         }
 
         public override byte[] Receive()
         {
 
-            return this.RemoteProxy.Connection.Receive();
+            return this.Connection.Receive();
 
         }
 
@@ -105,9 +89,10 @@ namespace Client
 
         private bool isOpen;
 
-        private RSACryptoServiceProvider rsa;
+        private RSAParameters publicKey;
+        private RSAParameters privateKey;
 
-        private KeyGenClass KeyGen;
+        private KeyGen keyGen;
 
         #endregion
 
@@ -116,10 +101,27 @@ namespace Client
         public override void Open()
         {
 
-            rsa = new RSACryptoServiceProvider();
-            rsa.ImportParameters(this.KeyGen.GetRSAParameters());
+            this.privateKey = this.keyGen.GetRSAParameters();
 
-
+            // Обмен ключами
+            RSAParameters keyToSend = new RSAParameters { Exponent = privateKey.Exponent, Modulus = privateKey.Modulus };
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new MemoryStream())
+            {
+                formatter.Serialize(stream, keyToSend);
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    this.Connection.Send(reader.ReadBytes((int)stream.Length));
+                }
+            }
+            using (Stream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(this.Connection.Receive());
+                }
+                this.publicKey = (RSAParameters)formatter.Deserialize(stream);
+            }
 
             this.isOpen = true;
 
@@ -128,7 +130,6 @@ namespace Client
         public override void Close()
         {
 
-            this.rsa.Dispose();
             this.isOpen = false;
 
         }
@@ -143,46 +144,60 @@ namespace Client
         public override void Send(byte[] message)
         {
 
-            this.RemoteProxy.Connection.Send(Encrypt(message));
+            this.Connection.Send(Encrypt(message));
 
         }
 
         public override byte[] Receive()
         {
 
-            return Decrypt(this.RemoteProxy.Connection.Receive());
+            return Decrypt(this.Connection.Receive());
 
         }
 
         private byte[] Encrypt(byte[] message)
         {
 
-
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportParameters(this.publicKey);
+                return rsa.Encrypt(message, false);
+            }
 
         }
 
         private byte[] Decrypt(byte[] message)
         {
 
-
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportParameters(this.publicKey);
+                return rsa.Decrypt(message, false);
+            }
 
         }
 
         public RSAProjectCryptography()
         {
-            this.KeyGen = new KeyGenClass();
+            this.keyGen = new KeyGen();
         }
 
         #endregion
 
         #region Classes
 
-        private class KeyGenClass
+        private class KeyGen
         {
+
+            #region Properties
 
             const int KeysCount = 2;
 
             private Queue<RSAParameters> Keys;
+
+            #endregion
+
+            #region Methods
 
             internal RSAParameters GetRSAParameters()
             {
@@ -190,7 +205,25 @@ namespace Client
                 {
                     for (int i = 0; i < KeysCount - this.Keys.Count; i++)
                     {
-                        Task.Run(() =>
+                        this.GenerateKeyToQueue();
+                    }
+                }
+
+                while (this.Keys.Count == 0)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+                this.GenerateKeyToQueue();
+                lock (this.Keys)
+                {
+                    return this.Keys.Dequeue();
+                }
+
+            }
+
+            private void GenerateKeyToQueue()
+            {
+                Task.Run(() =>
                         {
                             var rsa = new RSACryptoServiceProvider();
                             var result = rsa.ExportParameters(true);
@@ -200,23 +233,16 @@ namespace Client
                             }
                             rsa.Dispose();
                         });
-                    }
-                }
-
-                while (this.Keys.Count == 0)
-                {
-                    System.Threading.Thread.Sleep(1000);
-                }
-                return this.Keys.Dequeue();
-
             }
 
-            internal KeyGenClass()
+            internal KeyGen()
             {
 
                 this.Keys = new Queue<RSAParameters>();
 
             }
+
+            #endregion
 
         }
 
@@ -278,14 +304,14 @@ namespace Client
 
         public override void Close()
         {
-            this.client.Close();
-            this.client = null;
-            this.stream.Close();
-            this.stream = null;
             this.reader.Close();
             this.reader = null;
             this.writer.Close();
             this.writer = null;
+            this.stream.Close();
+            this.stream = null;
+            this.client.Close();
+            this.client = null;
         }
 
         public override void Send(byte[] message)

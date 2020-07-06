@@ -11,24 +11,6 @@ namespace Client
 
         #region Properties
 
-        public RemoteProxy RemoteProxy
-        {
-            get
-            { return RemoteProxy; }
-
-            set
-            {
-
-                if (RemoteProxy == null)
-                {
-                    RemoteProxy = value;
-                    return;
-                }
-                throw new System.Exception();
-
-            }
-        }
-
         public WorkManager WorkManager
         {
             get
@@ -40,40 +22,6 @@ namespace Client
                 if (WorkManager == null)
                 {
                     WorkManager = value;
-                    return;
-                }
-                throw new System.Exception();
-
-            }
-        }
-
-        #endregion
-
-        #region Methods
-
-        #endregion
-
-    }
-
-    /// <summary>
-    ///  Абстрактный класс, объединяющий функционал общения с сервером
-    /// </summary>
-    public abstract class RemoteProxy
-    {
-
-        #region Properties
-
-        public Client Client
-        {
-            get
-            { return Client; }
-
-            set
-            {
-
-                if (Client == null)
-                {
-                    Client = value;
                     return;
                 }
                 throw new System.Exception();
@@ -99,6 +47,23 @@ namespace Client
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        #endregion
+
+    }
+
+
+    /// <summary>
+    ///  Абстрактный класс, отвечающий за шифрование канала связи
+    /// </summary>
+    public abstract class ProjectCryptography
+    {
+
+        #region Properties
+
         public Connection Connection
         {
             get
@@ -117,33 +82,17 @@ namespace Client
             }
         }
 
-        #endregion
-
-        #region Methods
-
-        #endregion
-
-    }
-
-    /// <summary>
-    ///  Абстрактный класс, отвечающий за шифрование канала связи
-    /// </summary>
-    public abstract class ProjectCryptography
-    {
-
-        #region Properties
-
-        public RemoteProxy RemoteProxy
+        public Client Client
         {
             get
-            { return RemoteProxy; }
+            { return Client; }
 
             set
             {
 
-                if (RemoteProxy == null)
+                if (Client == null)
                 {
-                    RemoteProxy = value;
+                    Client = value;
                     return;
                 }
                 throw new System.Exception();
@@ -192,17 +141,17 @@ namespace Client
 
         #region Properties
 
-        public RemoteProxy RemoteProxy
+        public ProjectCryptography ProjectCryptography
         {
             get
-            { return RemoteProxy; }
+            { return ProjectCryptography; }
 
             set
             {
 
-                if (RemoteProxy == null)
+                if (ProjectCryptography == null)
                 {
-                    RemoteProxy = value;
+                    ProjectCryptography = value;
                     return;
                 }
                 throw new System.Exception();

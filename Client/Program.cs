@@ -19,14 +19,10 @@ namespace Client
             client.WorkManager = new ConcreteWorkManager();
             client.WorkManager.Client = client;
 
-            client.RemoteProxy = new ConcreteRemoteProxy();
-            client.RemoteProxy.Client = client;
+            client.ProjectCryptography = new RSAProjectCryptography();
+            client.ProjectCryptography.Client = client;
 
-            client.RemoteProxy.Connection = new TCPConnection();
-            client.RemoteProxy.Connection.RemoteProxy = client.RemoteProxy;
-
-            client.RemoteProxy.ProjectCryptography = new RSAProjectCryptography();
-            client.RemoteProxy.ProjectCryptography.RemoteProxy = client.RemoteProxy;
+            client.ProjectCryptography.Connection = new TCPConnection();
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
