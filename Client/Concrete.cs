@@ -40,6 +40,9 @@ namespace Client
 
         #region Methods
 
+        /// <summary>
+        ///  Метод, открывающий незашифрованный канал связи
+        /// </summary>
         public override void Open()
         {
 
@@ -47,6 +50,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, закрывающий незашифрованный канал связи
+        /// </summary>
         public override void Close()
         {
 
@@ -54,6 +60,7 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override bool IsOpen()
         {
 
@@ -61,6 +68,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, отправляющий сообщение серверу по незашифрованному каналу связи
+        /// </summary>
         public override void Send(byte[] message)
         {
 
@@ -68,6 +78,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, принимающий сообщение серверу по незашифрованному каналу связи
+        /// </summary>
         public override byte[] Receive()
         {
 
@@ -98,12 +111,14 @@ namespace Client
 
         #region Methods
 
+        /// <inheritdoc/>
         public override void Open()
         {
 
+            // Генерация ключей
             this.privateKey = this.keyGen.GetRSAParameters();
 
-            // Обмен ключами
+            // Обмен ключами с сервером
             RSAParameters keyToSend = new RSAParameters { Exponent = privateKey.Exponent, Modulus = privateKey.Modulus };
             BinaryFormatter formatter = new BinaryFormatter();
             using (Stream stream = new MemoryStream())
@@ -127,6 +142,7 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override void Close()
         {
 
@@ -134,6 +150,7 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override bool IsOpen()
         {
 
@@ -141,6 +158,7 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override void Send(byte[] message)
         {
 
@@ -148,6 +166,7 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override byte[] Receive()
         {
 
@@ -155,6 +174,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, шифруюший сообщение
+        /// </summary>
         private byte[] Encrypt(byte[] message)
         {
 
@@ -166,6 +188,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, дешифрующий сообщение
+        /// </summary>
         private byte[] Decrypt(byte[] message)
         {
 
@@ -186,6 +211,9 @@ namespace Client
 
         #region Classes
 
+        /// <summary>
+        ///  Класс, отвечающий за асинхронную генерацию ключей
+        /// </summary>
         private class KeyGen
         {
 
@@ -199,38 +227,56 @@ namespace Client
 
             #region Methods
 
+            /// <summary>
+            ///  Метод, возвращающий ключ
+            /// </summary>
             internal RSAParameters GetRSAParameters()
             {
-                if (this.Keys.Count < KeysCount)
+                // Заполнение очереди с ключами до указанного количества
+                for (int i = 0; i < KeysCount - this.Keys.Count; i++)
                 {
-                    for (int i = 0; i < KeysCount - this.Keys.Count; i++)
-                    {
-                        this.GenerateKeyToQueue();
-                    }
+                    this.GenerateKeyToQueue();
+
                 }
 
+                // Ожидание появления ключей в очереди
                 while (this.Keys.Count == 0)
                 {
                     System.Threading.Thread.Sleep(1000);
                 }
-                this.GenerateKeyToQueue();
+
+                // Извлечение результата
+                RSAParameters result;
                 lock (this.Keys)
                 {
-                    return this.Keys.Dequeue();
+                    result = this.Keys.Dequeue();
                 }
+
+                // Генерация ключа в замен использованного
+                this.GenerateKeyToQueue();
+
+                return result;
 
             }
 
+            /// <summary>
+            ///  Метод, генерирующий ключ и добавляющий его в очередь
+            /// </summary>
             private void GenerateKeyToQueue()
             {
+                // Запуск асинхронной генерации
                 Task.Run(() =>
                         {
+                            // Генерация
                             var rsa = new RSACryptoServiceProvider();
                             var result = rsa.ExportParameters(true);
+
+                            // Добавление в очередь
                             lock (this.Keys)
                             {
                                 this.Keys.Enqueue(result);
                             }
+
                             rsa.Dispose();
                         });
             }
@@ -270,6 +316,7 @@ namespace Client
 
         #region Methods
 
+        /// <inheritdoc/>
         public override bool IsOpen()
         {
 
@@ -277,6 +324,9 @@ namespace Client
 
         }
 
+        /// <summary>
+        ///  Метод, при каждом вызове возвращающий адреса разных серверов
+        /// </summary>
         private IPEndPoint GetProxyAdress()
         {
 
@@ -289,11 +339,13 @@ namespace Client
 
         }
 
+        /// <inheritdoc/>
         public override byte[] Receive()
         {
             return this.reader.ReadBytes((int)this.stream.Length);
         }
 
+        /// <inheritdoc/>
         public override void Open()
         {
             this.client.Connect(this.GetProxyAdress());
@@ -302,6 +354,7 @@ namespace Client
             this.writer = new BinaryWriter(this.stream);
         }
 
+        /// <inheritdoc/>
         public override void Close()
         {
             this.reader.Close();
@@ -314,12 +367,14 @@ namespace Client
             this.client = null;
         }
 
+        /// <inheritdoc/>
         public override void Send(byte[] message)
         {
             this.writer.Write(message);
             this.writer.Flush();
         }
 
+        /// <inheritdoc/>
         public TCPConnection()
         {
 
@@ -331,9 +386,7 @@ namespace Client
 
     }
 
-    /// <summary>
-    ///  Класс, выполняющий вычисления
-    /// </summary>
+    /// <inheritdoc/>
     public class ConcreteWorkManager : WorkManager
     {
 
@@ -348,16 +401,27 @@ namespace Client
         /// <inheritdoc/>
         public override byte[] ExecuteWork(byte[] workSeed, string path)
         {
+            // Определение пути к файлу с объектом класса Work
             path = Path.Combine(Environment.CurrentDirectory, path);
+
+            // Чтение объекта класса Work в stream
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
+
+                // Десериализация объекта класса Work из stream
                 this.Work = (Work)formatter.Deserialize(stream);
             }
+
+            // Загрузка сборки с кодом вычислений из объекта Work
             Assembly assembly = Assembly.Load(this.Work.WorkCode);
+
+            // Получение метода, выполняющего вычисления
             Type type = assembly.GetType("WorkNamespace.WorkClass", true, true);
             object obj = Activator.CreateInstance(type);
             MethodInfo method = type.GetMethod("ExecuteWork");
+
+            // Запуск вычислений и возврат результата
             return (byte[])method.Invoke(obj, new object[] { workSeed });
         }
 

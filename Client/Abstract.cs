@@ -120,7 +120,7 @@ namespace Client
         public abstract void Close();
 
         /// <summary>
-        ///  Метод, посылающий сообщение
+        ///  Метод, отправляющий сообщение
         /// </summary>
         public abstract void Send(byte[] message);
 
