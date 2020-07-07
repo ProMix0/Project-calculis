@@ -29,41 +29,6 @@ namespace Client
             }
         }
 
-        public ProjectCryptography ProjectCryptography
-        {
-            get
-            { return ProjectCryptography; }
-
-            set
-            {
-
-                if (ProjectCryptography == null)
-                {
-                    ProjectCryptography = value;
-                    return;
-                }
-                throw new System.Exception();
-
-            }
-        }
-
-        #endregion
-
-        #region Methods
-
-        #endregion
-
-    }
-
-
-    /// <summary>
-    ///  Абстрактный класс, отвечающий за шифрование канала связи
-    /// </summary>
-    public abstract class ProjectCryptography
-    {
-
-        #region Properties
-
         public Connection Connection
         {
             get
@@ -82,52 +47,9 @@ namespace Client
             }
         }
 
-        public Client Client
-        {
-            get
-            { return Client; }
-
-            set
-            {
-
-                if (Client == null)
-                {
-                    Client = value;
-                    return;
-                }
-                throw new System.Exception();
-
-            }
-        }
-
         #endregion
 
         #region Methods
-
-        /// <summary>
-        ///  Метод, возвращающий состояние соединения
-        /// </summary>
-        public abstract bool IsOpen();
-
-        /// <summary>
-        ///  Метод, открывающий зашифрованный канал связи
-        /// </summary>
-        public abstract void Open();
-
-        /// <summary>
-        ///  Метод, закрывающий зашифрованный канал связи
-        /// </summary>
-        public abstract void Close();
-
-        /// <summary>
-        ///  Метод, отправляющий сообщение
-        /// </summary>
-        public abstract void Send(byte[] message);
-
-        /// <summary>
-        ///  Метод, принимающий сообщение
-        /// </summary>
-        public abstract byte[] Receive();
 
         #endregion
 
@@ -141,23 +63,7 @@ namespace Client
 
         #region Properties
 
-        public ProjectCryptography ProjectCryptography
-        {
-            get
-            { return ProjectCryptography; }
-
-            set
-            {
-
-                if (ProjectCryptography == null)
-                {
-                    ProjectCryptography = value;
-                    return;
-                }
-                throw new System.Exception();
-
-            }
-        }
+        
 
         #endregion
 
