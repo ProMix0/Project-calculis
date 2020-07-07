@@ -19,10 +19,7 @@ namespace Client
             client.WorkManager = new ConcreteWorkManager();
             client.WorkManager.Client = client;
 
-            client.ProjectCryptography = new RSAProjectCryptography();
-            client.ProjectCryptography.Client = client;
-
-            client.ProjectCryptography.Connection = new TCPConnection();
+            client.Connection = new RSAProjectCryptography(new TCPConnection());
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
