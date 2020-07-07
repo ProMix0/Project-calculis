@@ -29,16 +29,23 @@ namespace Client
     /// <summary>
     ///  Класс, не шифрующий канал связи
     /// </summary>
-    public class NoneProjectCryptography : ProjectCryptography
+    public class NoneProjectCryptography : Connection
     {
 
         #region Properties
 
         private bool isOpen;
 
+        private readonly Connection connection;
+
         #endregion
 
         #region Methods
+
+        public NoneProjectCryptography(Connection connection)
+        {
+            this.connection = connection;
+        }
 
         /// <summary>
         ///  Метод, открывающий незашифрованный канал связи
@@ -46,7 +53,7 @@ namespace Client
         public override void Open()
         {
 
-            this.Connection.Open();
+            this.connection.Open();
 
         }
 
@@ -56,7 +63,7 @@ namespace Client
         public override void Close()
         {
 
-            this.Connection.Close();
+            this.connection.Close();
 
         }
 
@@ -74,7 +81,7 @@ namespace Client
         public override void Send(byte[] message)
         {
 
-            this.Connection.Send(message);
+            this.connection.Send(message);
 
         }
 
@@ -84,7 +91,7 @@ namespace Client
         public override byte[] Receive()
         {
 
-            return this.Connection.Receive();
+            return this.connection.Receive();
 
         }
 
@@ -95,7 +102,7 @@ namespace Client
     /// <summary>
     ///  Класс, шифрующий канал связи по алгоритму RSA
     /// </summary>
-    public class RSAProjectCryptography : ProjectCryptography
+    public class RSAProjectCryptography : Connection
     {
 
         #region Properties
@@ -107,9 +114,18 @@ namespace Client
 
         private KeyGen keyGen;
 
+        private readonly Connection connection;
+
         #endregion
 
         #region Methods
+
+        public RSAProjectCryptography(Connection connection)
+        {
+            
+            this.connection = connection;
+
+        }
 
         /// <inheritdoc/>
         public override void Open()
@@ -121,22 +137,15 @@ namespace Client
             // Обмен ключами с сервером
             RSAParameters keyToSend = new RSAParameters { Exponent = privateKey.Exponent, Modulus = privateKey.Modulus };
             BinaryFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new MemoryStream())
-            {
-                formatter.Serialize(stream, keyToSend);
-                using (BinaryReader reader = new BinaryReader(stream))
-                {
-                    this.Connection.Send(reader.ReadBytes((int)stream.Length));
-                }
-            }
-            using (Stream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(this.Connection.Receive());
-                }
-                this.publicKey = (RSAParameters)formatter.Deserialize(stream);
-            }
+            using Stream stream1 = new MemoryStream();
+            formatter.Serialize(stream1, keyToSend);
+            using BinaryReader reader = new BinaryReader(stream1);
+            this.connection.Send(reader.ReadBytes((int)stream1.Length));
+
+            using Stream stream2 = new MemoryStream();
+            using BinaryWriter writer = new BinaryWriter(stream2);
+            writer.Write(this.connection.Receive());
+            this.publicKey = (RSAParameters)formatter.Deserialize(stream2);
 
             this.isOpen = true;
 
@@ -162,7 +171,7 @@ namespace Client
         public override void Send(byte[] message)
         {
 
-            this.Connection.Send(Encrypt(message));
+            this.connection.Send(Encrypt(message));
 
         }
 
@@ -170,8 +179,13 @@ namespace Client
         public override byte[] Receive()
         {
 
-            return Decrypt(this.Connection.Receive());
+            return Decrypt(this.connection.Receive());
 
+        }
+
+        public RSAProjectCryptography()
+        {
+            this.keyGen = new KeyGen();
         }
 
         /// <summary>
@@ -180,11 +194,11 @@ namespace Client
         private byte[] Encrypt(byte[] message)
         {
 
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                rsa.ImportParameters(this.publicKey);
-                return rsa.Encrypt(message, false);
-            }
+            using var rsa = new RSACryptoServiceProvider();
+
+            rsa.ImportParameters(this.publicKey);
+            return rsa.Encrypt(message, false);
+
 
         }
 
@@ -194,17 +208,12 @@ namespace Client
         private byte[] Decrypt(byte[] message)
         {
 
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                rsa.ImportParameters(this.privateKey);
-                return rsa.Decrypt(message, false);
-            }
+            using var rsa = new RSACryptoServiceProvider();
 
-        }
+            rsa.ImportParameters(this.privateKey);
+            return rsa.Decrypt(message, false);
 
-        public RSAProjectCryptography()
-        {
-            this.keyGen = new KeyGen();
+
         }
 
         #endregion
@@ -259,6 +268,13 @@ namespace Client
 
             }
 
+            internal KeyGen()
+            {
+
+                this.Keys = new Queue<RSAParameters>();
+
+            }
+
             /// <summary>
             ///  Метод, генерирующий ключ и добавляющий его в очередь
             /// </summary>
@@ -268,7 +284,7 @@ namespace Client
                 Task.Run(() =>
                         {
                             // Генерация
-                            var rsa = new RSACryptoServiceProvider();
+                            using var rsa = new RSACryptoServiceProvider();
                             var result = rsa.ExportParameters(true);
 
                             // Добавление в очередь
@@ -276,16 +292,7 @@ namespace Client
                             {
                                 this.Keys.Enqueue(result);
                             }
-
-                            rsa.Dispose();
                         });
-            }
-
-            internal KeyGen()
-            {
-
-                this.Keys = new Queue<RSAParameters>();
-
             }
 
             #endregion
@@ -405,13 +412,11 @@ namespace Client
             path = Path.Combine(Environment.CurrentDirectory, path);
 
             // Чтение объекта класса Work в stream
-            using (var stream = new FileStream(path, FileMode.Open))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
+            using var stream = new FileStream(path, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
 
-                // Десериализация объекта класса Work из stream
-                this.Work = (Work)formatter.Deserialize(stream);
-            }
+            // Десериализация объекта класса Work из stream
+            this.Work = (Work)formatter.Deserialize(stream);
 
             // Загрузка сборки с кодом вычислений из объекта Work
             Assembly assembly = Assembly.Load(this.Work.WorkCode);
