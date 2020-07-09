@@ -241,8 +241,8 @@ namespace Client
             /// </summary>
             internal RSAParameters GetRSAParameters()
             {
-                // Заполнение очереди с ключами до указанного количества
-                for (int i = 0; i < KeysCount - this.Keys.Count; i++)
+                // Заполнение очереди с ключами до указанного количества +1
+                for (int i = 0; i <= KeysCount - this.Keys.Count; i++)
                 {
                     this.GenerateKeyToQueue();
 
@@ -260,9 +260,6 @@ namespace Client
                 {
                     result = this.Keys.Dequeue();
                 }
-
-                // Генерация ключа в замен использованного
-                this.GenerateKeyToQueue();
 
                 return result;
 
