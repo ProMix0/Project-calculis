@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vt9wUKxpYmYnFOqDvHD1z6Z9l51M87uUeH/zIisUf63jeYlPCGeWQeS0gu22ubaldVan9d5YS7KgMgVWgIvpDA==",
+  "dgSpecHash": "daSJjxEcNIT3cit7ckleOXvevJwNdNDbP0OkiqUbBQ1A54vIt0BinjnzrBpxLs7c1qT27OIsQ/5jxjhYA8Qj0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Proxy.csproj",
+  "projectFilePath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Server.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

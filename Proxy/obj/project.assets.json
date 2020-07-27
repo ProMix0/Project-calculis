@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Proxy.csproj",
-      "projectName": "Proxy",
-      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Proxy.csproj",
+      "projectUniqueName": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Server.csproj",
+      "projectName": "Server",
+      "projectPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\Server.csproj",
       "packagesPath": "C:\\Users\\Миша\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Миша\\source\\repos\\Project-calculis\\Proxy\\obj\\",
       "projectStyle": "PackageReference",

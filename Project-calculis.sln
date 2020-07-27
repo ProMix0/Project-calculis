@@ -3,21 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Project-calculis\Database.csproj", "{8DED5805-AC67-4634-8172-7EB134924F48}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1863D01-CD68-4677-AB92-3B499B4EA626}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		Structure of project.pptx = Structure of project.pptx
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Proxy\Server.csproj", "{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractLibrary", "AbstractClasses\AbstractLibrary.csproj", "{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proxy", "Proxy\Proxy.csproj", "{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcreteLibrary", "ConcreteLibrary\ConcreteLibrary.csproj", "{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "ClientNew\Client.csproj", "{2BCE0971-15D4-478C-9BF1-EECC0B62E920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,26 +19,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8DED5805-AC67-4634-8172-7EB134924F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DED5805-AC67-4634-8172-7EB134924F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DED5805-AC67-4634-8172-7EB134924F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DED5805-AC67-4634-8172-7EB134924F48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F83DFF5D-5C0E-4B1A-8EAA-60556D8F8550}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85FBE4D4-5443-4399-9142-2B0E46E3A7F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC36E75-7796-49CB-95DB-0B34AEB9D8EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5D7106B-6CFE-4D23-963A-5416C6C7DCA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCE0971-15D4-478C-9BF1-EECC0B62E920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCE0971-15D4-478C-9BF1-EECC0B62E920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCE0971-15D4-478C-9BF1-EECC0B62E920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCE0971-15D4-478C-9BF1-EECC0B62E920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
