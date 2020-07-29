@@ -6,6 +6,25 @@
         xmlns:local="clr-namespace:ClientApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="Blue"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,32 +36,56 @@
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" ShowsPreview="True" Width="3"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <Border Background="Red" Grid.Column="2"/>
         <ScrollViewer Grid.Column="0">
-            <StackPanel >
-                <ItemsControl ItemsSource="{Binding MetaWorkItems}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type local:MetaWork}">
-                            <Border BorderBrush="Black" BorderThickness="1">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Image Grid.Column="1" Grid.Row="1" Source="{Binding Image}"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding DisplayName}" Background="AliceBlue"/>
-                                    <TextBlock ClipToBounds="True" Text="{Binding ShortDescription}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
+            <ListBox x:Name="listBox" ItemsSource="{Binding MetaWorkItems}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
+                        </Style.Resources>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:MetaWork}">
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="1" Grid.Row="1" Source="{Binding ImageSource}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding DisplayName}" FontWeight="Bold" Background="AliceBlue"/>
+                                <TextBlock ClipToBounds="True" Text="{Binding ShortDescription}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </ScrollViewer>
+        <Grid Grid.Column="2" DataContext="{Binding ElementName=listBox, Path=SelectedItem}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="2" Grid.Row="1" Source="{Binding ImageSource}"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding FullDescription}"
+                       VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Button Grid.Column="0" Grid.Row="0" Content="Run"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="Download"/>
+        </Grid>
     </Grid>
 </Window>

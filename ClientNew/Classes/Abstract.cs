@@ -4,6 +4,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace ClientApp
@@ -182,8 +183,7 @@ namespace ClientApp
 
         public readonly string name;
         public string DisplayName { get; }
-        private readonly BitmapImage icon = new BitmapImage();
-        public Image Image { get; } = new Image();
+        public BitmapFrame ImageSource { get; }
         public string ShortDescription { get; }
         public string FullDescription { get; }
         public string delLoadButtonText;
@@ -197,10 +197,8 @@ namespace ClientApp
         {
             this.name = name;
             this.DisplayName = displayName;
-            this.icon.BeginInit();
-            this.icon.UriSource = new Uri(iconSource);
-            this.icon.EndInit();
-            this.Image.Source = icon;
+            this.ImageSource = new JpegBitmapDecoder(new Uri(iconSource, UriKind.RelativeOrAbsolute),
+                BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default).Frames[0];
             this.ShortDescription = shortDescription;
             this.FullDescription = fullDescription;
         }

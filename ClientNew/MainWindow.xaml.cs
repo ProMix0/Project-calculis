@@ -29,9 +29,12 @@ namespace ClientApp
         {
             InitializeComponent();
             DataContext = this;
+            listBox.SelectedIndex = 0;
 
             MetaWorkItems.Add(new ConcreteMetaWork("name", "Example name",
-                @"C:\Users\Миша\source\repos\Project-calculis\ClientNew\Example.JPG", "Description", "Text"));
+                @"C:\Users\Миша\source\repos\Project-calculis\ClientNew\Example.JPG", "Description", "Most\nfull\ndescription"));
+            MetaWorkItems.Add(new ConcreteMetaWork("name", "Example name 2",
+                @"C:\Users\Миша\source\repos\Project-calculis\ClientNew\Example.JPG", "Description", "Most\nfull\ndescription\n2"));
         }
     }
 }

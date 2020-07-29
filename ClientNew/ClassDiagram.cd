@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ClientApp.Client" Collapsed="true">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEEAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Abstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.Connection" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAQAAAAAACAAAA=</HashCode>
+      <FileName>Classes\Abstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.WorkManager" Collapsed="true">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Classes\Abstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.Work" Collapsed="true">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Abstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.MetaWork" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAgAAAAAAAEAAAAAABAEAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Classes\Abstract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.ConcreteClient" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAABgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.NoneProjectCryptography" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAIAAAAEABAAAAAAAAAAAQAAAAACCAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.RSAProjectCryptography" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQABAAAAAAAAIAAQBEABAAAAAAAAAAAQAAAAACSAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.TCPConnection" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAIgAAAFAAAAAAAAAAAAAQCQAABACQAgA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.ConcreteWorkManager" Collapsed="true">
+    <Position X="7" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.ConcreteWork" Collapsed="true">
+    <Position X="8.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientApp.ConcreteMetaWork" Collapsed="true">
+    <Position X="11.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Concrete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
