@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        MaxHeight="400"
+        SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+        WindowStyle="None">
     <Window.Resources>
         <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
@@ -24,68 +27,83 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <local:ValuteConverter x:Key="valuteConverter"/>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" ShowsPreview="True" Width="3"
-        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <ScrollViewer Grid.Column="0">
-            <ListBox x:Name="listBox" ItemsSource="{Binding MetaWorkItems}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Style.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray" />
-                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
-                        </Style.Resources>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type local:MetaWork}">
-                        <Border BorderBrush="Black" BorderThickness="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Column="1" Grid.Row="1" Source="{Binding ImageSource}"/>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding DisplayName}" FontWeight="Bold" Background="AliceBlue"/>
-                                <TextBlock ClipToBounds="True" Text="{Binding ShortDescription}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <Grid Grid.Column="2" DataContext="{Binding ElementName=listBox, Path=SelectedItem}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+    <Border BorderBrush="Black" BorderThickness="2">
+        <DockPanel LastChildFill="True" HorizontalAlignment="Center" Margin="2">
+        <StackPanel x:Name="buttonsPanel" Orientation="Horizontal" FlowDirection="RightToLeft" DockPanel.Dock="Top" Background="Aqua">
+            <Button Content="Close" Click="CloseWindow"/>
+            <Button Content="Maximize" Click="MaxMinWindow"/>
+            <Button Content="Trey"/>
+            <Button Content="Collapse" Click="CollapseWindow"/>
+        </StackPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Settings">
+                <MenuItem Header="Start with windows" IsCheckable="True"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Image Grid.Column="2" Grid.Row="1" Source="{Binding ImageSource}"/>
-            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding FullDescription}"
-                       VerticalAlignment="Top" HorizontalAlignment="Center"/>
-            <Button Grid.Column="0" Grid.Row="0" Content="Run"/>
-            <Button Grid.Column="1" Grid.Row="0" Content="Download"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="430"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+            <!--<ScrollViewer Grid.Column="0" CanContentScroll="True">-->
+                <ListBox x:Name="listBox" ItemsSource="{Binding MetaWorkItems}" ScrollViewer.CanContentScroll="False">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray" />
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
+                            </Style.Resources>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:MetaWork}">
+                            <Border BorderBrush="Black" BorderThickness="1">
+                                <Grid Width="400" Height="200">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="7*"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Column="1" Grid.Row="1" Source="{Binding ImageSource}" ClipToBounds="True"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding DisplayName}" FontWeight="Bold"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Pay, Converter={StaticResource valuteConverter}}"/>
+                                    <TextBlock ClipToBounds="True" Text="{Binding ShortDescription}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"
+                                        TextWrapping="Wrap" Margin="5"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            <!--</ScrollViewer>-->
+            <Grid Grid.Column="1" DataContext="{Binding ElementName=listBox, Path=SelectedItem}" MinWidth="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="21"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="2" Grid.Row="1" Source="{Binding ImageSource}"/>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding FullDescription}"
+                       VerticalAlignment="Top" HorizontalAlignment="Center" ClipToBounds="True"/>
+                <Button Grid.Column="0" Grid.Row="0" Content="Run"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="Download"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </DockPanel>
+    </Border>
 </Window>

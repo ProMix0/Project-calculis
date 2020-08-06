@@ -487,8 +487,8 @@ namespace ClientApp
         #region Methods
 
         public ConcreteMetaWork(string name, string displayName, string iconSource, string shortDescription,
-            string fullDescription)
-            : base(name, displayName, iconSource, shortDescription, fullDescription)
+            string fullDescription, int pay)
+            : base(name, displayName, iconSource, shortDescription, fullDescription, pay)
         {
 
         }

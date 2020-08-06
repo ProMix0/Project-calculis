@@ -62,12 +62,12 @@ namespace TestProgramm
             */
 
 
-            Console.WriteLine("Creating");
-            var rsa = new RSACryptoServiceProvider();
-            Console.WriteLine("Export");
-            RSAParameters parameters = rsa.ExportParameters(false);
-            Console.WriteLine("After export");
-            Console.ReadKey();
+            //Console.WriteLine("Creating");
+            //var rsa = new RSACryptoServiceProvider();
+            //Console.WriteLine("Export");
+            //RSAParameters parameters = rsa.ExportParameters(false);
+            //Console.WriteLine("After export");
+            //Console.ReadKey();
 
         }
     }

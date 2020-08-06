@@ -186,21 +186,22 @@ namespace ClientApp
         public BitmapFrame ImageSource { get; }
         public string ShortDescription { get; }
         public string FullDescription { get; }
-        public string delLoadButtonText;
+        public int Pay { get; }
 
         #endregion
 
         #region Methods
 
         public MetaWork(string name, string displayName, string iconSource, string shortDescription,
-            string fullDescription)
+            string fullDescription, int pay)
         {
             this.name = name;
-            this.DisplayName = displayName;
-            this.ImageSource = new JpegBitmapDecoder(new Uri(iconSource, UriKind.RelativeOrAbsolute),
+            DisplayName = displayName;
+            ImageSource = new JpegBitmapDecoder(new Uri(iconSource, UriKind.RelativeOrAbsolute),
                 BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default).Frames[0];
-            this.ShortDescription = shortDescription;
-            this.FullDescription = fullDescription;
+            ShortDescription = shortDescription;
+            FullDescription = fullDescription;
+            Pay = pay;
         }
 
         #endregion
