@@ -25,6 +25,7 @@ namespace ClientApp
     {
 
         public ObservableCollection<MetaWork> MetaWorkItems { get; } = new ObservableCollection<MetaWork>();
+        public readonly Client appClient;
 
         public MainWindow()
         {
@@ -33,8 +34,15 @@ namespace ClientApp
             listBox.SelectedIndex = 0;
             buttonsPanel.MouseLeftButtonDown += new MouseButtonEventHandler(LayoutRoot_MouseLeftButtonDown);
 
+            appClient = new ConcreteClient(new ConcreteWorkManager());
+
+            TestMethod();
+        }
+
+        private void TestMethod()
+        {
             MetaWorkItems.Add(new ConcreteMetaWork("name", "Example name",
-                @"E:\Разбор\107_PANA\P1060910.JPG", "My some description", 
+                @"E:\Разбор\107_PANA\P1060910.JPG", "My some description",
                 "Most\nfull\ndescription", 100));
             MetaWorkItems.Add(new ConcreteMetaWork("name", "Example name 2",
                 @"E:\Разбор\107_PANA\P1070539.JPG", "Description", "Most\nfull\ndescription\n2", 200));

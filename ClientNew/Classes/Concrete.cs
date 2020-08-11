@@ -22,22 +22,15 @@ namespace ClientApp
 
         #region Properties
 
-        private readonly List<IPEndPoint> adresses = new List<IPEndPoint>();
-        private int adressNumber;
+
 
         #endregion
 
         #region Methods
 
-        /// <inheritdoc/>
-        internal override IPEndPoint GetServerAdress()
+        public ConcreteClient(WorkManager manager)
         {
-            adressNumber++;
-            if (adressNumber >= adresses.Count)
-            {
-                adressNumber = 0;
-            }
-            return adresses[adressNumber];
+            WorkManager = manager;
         }
 
         #endregion
@@ -106,6 +99,30 @@ namespace ClientApp
 
             if (!isOpen) throw new Exception("Channel is close");
             return this.connection.Receive();
+
+        }
+
+        #endregion
+
+        #region Classes
+
+        public class NoneProjectCryptographyFactory : ConnectionFactory
+        {
+
+            #region Methods
+
+            static NoneProjectCryptographyFactory()
+            {
+                Role = ConnectionRole.Cryptography;
+            }
+
+            public override Connection Build(Connection connection)
+            {
+                if (connection == null) throw new ArgumentNullException();
+                return new NoneProjectCryptography(connection);
+            }
+
+            #endregion
 
         }
 
@@ -316,6 +333,26 @@ namespace ClientApp
 
         }
 
+        public class RSAProjectCryptographyFactory : ConnectionFactory
+        {
+
+            #region Methods
+
+            static RSAProjectCryptographyFactory()
+            {
+                Role = ConnectionRole.Cryptography;
+            }
+
+            public override Connection Build(Connection connection)
+            {
+                if (connection == null) throw new ArgumentNullException();
+                return new RSAProjectCryptography(connection);
+            }
+
+            #endregion
+
+        }
+
         #endregion
 
     }
@@ -343,66 +380,72 @@ namespace ClientApp
         /// <inheritdoc/>
         public override bool IsOpen()
         {
-
             return client.Connected;
-
         }
 
         /// <inheritdoc/>
         public override byte[] Receive()
         {
-            return this.reader.ReadBytes((int)this.stream.Length);
+            return reader.ReadBytes((int)stream.Length);
         }
 
         /// <inheritdoc/>
         public override void Open()
         {
-            this.client.Connect(this.GetProxyAdress());
-            this.stream = client.GetStream();
-            this.reader = new BinaryReader(this.stream);
-            this.writer = new BinaryWriter(this.stream);
+            client.Connect(HelperMethods.GetServerAdress());
+            stream = client.GetStream();
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
         }
 
         /// <inheritdoc/>
         public override void Close()
         {
-            this.reader.Close();
-            this.reader = null;
-            this.writer.Close();
-            this.writer = null;
-            this.stream.Close();
-            this.stream = null;
-            this.client.Close();
-            this.client = null;
+            reader.Close();
+            reader = null;
+            writer.Close();
+            writer = null;
+            stream.Close();
+            stream = null;
+            client.Close();
+            client = null;
         }
 
         /// <inheritdoc/>
         public override void Send(byte[] message)
         {
-            this.writer.Write(message);
-            this.writer.Flush();
+            writer.Write(message);
+            writer.Flush();
         }
 
         /// <inheritdoc/>
         public TCPConnection()
         {
 
-            this.client = new TcpClient();
+            client = new TcpClient();
 
         }
 
-        /// <summary>
-        ///  Метод, при каждом вызове возвращающий адреса разных серверов
-        /// </summary>
-        private IPEndPoint GetProxyAdress()
+        #endregion
+
+        #region Classes
+
+        public class TCPConnectionFactory : ConnectionFactory
         {
 
-            adressNumber++;
-            if (adressNumber >= proxyAdresses.Count)
+            #region Methods
+
+            static TCPConnectionFactory()
             {
-                adressNumber = 0;
+                Role = ConnectionRole.Transfer;
             }
-            return proxyAdresses[adressNumber];
+
+            public override Connection Build(Connection connection)
+            {
+                return new TCPConnection();
+            }
+
+            #endregion
 
         }
 
@@ -419,35 +462,16 @@ namespace ClientApp
 
         #region Properties
 
-        private Work work;
+        
 
         #endregion
 
         #region Methods
 
         /// <inheritdoc/>
-        public override byte[] ExecuteWork(byte[] workSeed, string path)
+        public override byte[] ExecuteWork(byte[] workSeed, string nameOfWork)
         {
-            // Определение пути к файлу с объектом класса Work
-            path = Path.Combine(Environment.CurrentDirectory, path);
-
-            // Чтение объекта класса Work в stream
-            using var stream = new FileStream(path, FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            // Десериализация объекта класса Work из stream
-            this.work = (Work)formatter.Deserialize(stream);
-
-            // Загрузка сборки с кодом вычислений из объекта Work
-            Assembly assembly = Assembly.Load(this.work.WorkCode);
-
-            // Получение метода, выполняющего вычисления
-            Type type = assembly.GetType("WorkNamespace.WorkClass", true, true);
-            object obj = Activator.CreateInstance(type);
-            MethodInfo method = type.GetMethod("ExecuteWork");
-
-            // Запуск вычислений и возврат результата
-            return (byte[])method.Invoke(obj, new object[] { workSeed });
+            return works[nameOfWork].Run(workSeed);
         }
 
         #endregion
@@ -457,6 +481,7 @@ namespace ClientApp
     /// <summary>
     ///  Класс, преставляющий код вычислений
     /// </summary>
+    [Serializable]
     public class ConcreteWork:Work
     {
 
@@ -468,13 +493,14 @@ namespace ClientApp
 
         #region Methods
 
-        public ConcreteWork(string name, byte[] code)
-            :base(name, code)
+        public ConcreteWork(string name, Func<byte[], byte[]> code, MetaWork metaWork)
+            :base(name, code, metaWork)
         { }
 
         #endregion
     }
 
+    [Serializable]
     public class ConcreteMetaWork : MetaWork
     {
 
@@ -491,6 +517,35 @@ namespace ClientApp
             : base(name, displayName, iconSource, shortDescription, fullDescription, pay)
         {
 
+        }
+
+        #endregion
+
+    }
+
+    internal static class HelperMethods
+    {
+
+        #region Properties
+
+        private static readonly List<IPEndPoint> adresses = new List<IPEndPoint>();
+        private static int adressNumber;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///  Метод, при каждом вызове возвращающий адреса разных серверов
+        /// </summary>
+        internal static IPEndPoint GetServerAdress()
+        {
+            adressNumber++;
+            if (adressNumber >= adresses.Count)
+            {
+                adressNumber = 0;
+            }
+            return adresses[adressNumber];
         }
 
         #endregion

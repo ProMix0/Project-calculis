@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -58,10 +60,10 @@ namespace ClientApp
 
         #region Methods
 
-        /// <summary>
-        ///  Метод, при каждом вызове возвращающий адреса разных серверов
-        /// </summary>
-        internal abstract IPEndPoint GetServerAdress();
+        public Client(WorkManager manager)
+        {
+            WorkManager = manager;
+        }
 
         #endregion
 
@@ -108,6 +110,37 @@ namespace ClientApp
 
         #endregion
 
+        #region Classes
+
+        public abstract class ConnectionFactory
+        {
+
+            #region Properties
+
+            public static ConnectionRole Role { get; protected set; }
+
+            #endregion
+
+            #region Methods
+
+            public abstract Connection Build(Connection connection);
+
+            #endregion
+
+            #region Classes
+
+            public enum ConnectionRole
+            {
+                Cryptography,
+                Transfer
+            }
+
+            #endregion
+
+        }
+
+        #endregion
+
     }
 
     /// <summary>
@@ -118,6 +151,7 @@ namespace ClientApp
 
         #region Properties
 
+        private Dictionary<string, Work> works = new Dictionary<string, Work>();
         public Client Client
         {
             get
@@ -140,6 +174,19 @@ namespace ClientApp
 
         #region Methods
 
+        public WorkManager()
+        {
+            foreach (var path in Directory.EnumerateFiles("/Data/Works", "*.work"))
+            {
+                using var stream = new FileStream(path, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                if (formatter.Deserialize(stream) is Work work)
+                {
+                    works.Add(work.Name, work);
+                }
+            }
+        }
+
         /// <summary>
         ///  Метод, запускающий вычисления
         /// </summary>
@@ -152,23 +199,25 @@ namespace ClientApp
     /// <summary>
     ///  Абстрактный класс, преставляющий код вычислений
     /// </summary>
+    [Serializable]
     public abstract class Work
     {
 
         #region Properties
 
         public readonly string Name;
-
-        public readonly byte[] WorkCode;
+        public readonly MetaWork MetaWork;
+        public readonly Func<byte[], byte[]> Run;
 
         #endregion
 
         #region Methods
 
-        public Work(string name, byte[] code)
+        public Work(string name, Func<byte[], byte[]> code, MetaWork metaWork)
         {
             Name = name;
-            WorkCode = code;
+            Run = code;
+            MetaWork = metaWork;
         }
 
         #endregion
