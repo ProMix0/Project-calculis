@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientApp"
+        xmlns:library="clr-namespace:CommonLibrary;assembly=CommonLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         MaxHeight="400"
@@ -34,7 +35,7 @@
         <StackPanel x:Name="buttonsPanel" Orientation="Horizontal" FlowDirection="RightToLeft" DockPanel.Dock="Top" Background="Aqua">
             <Button Content="Close" Click="CloseWindow"/>
             <Button Content="Maximize" Click="MaxMinWindow"/>
-            <Button Content="Trey"/>
+            <Button Content="Tray" Click="ToTray"/>
             <Button Content="Collapse" Click="CollapseWindow"/>
         </StackPanel>
         <Menu DockPanel.Dock="Top">
@@ -63,7 +64,7 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type local:MetaWork}">
+                        <DataTemplate DataType="{x:Type library:MetaWork}">
                             <Border BorderBrush="Black" BorderThickness="1">
                                 <Grid Width="400" Height="200">
                                     <Grid.ColumnDefinitions>
