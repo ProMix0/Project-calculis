@@ -18,3 +18,6 @@ C:\Users\Миша\source\repos\Project-calculis\ClientNew\obj\Debug\netcoreapp3.
 C:\Users\Миша\source\repos\Project-calculis\ClientNew\obj\Debug\netcoreapp3.1\Client.pdb
 C:\Users\Миша\source\repos\Project-calculis\ClientNew\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
 C:\Users\Миша\source\repos\Project-calculis\ClientNew\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\Миша\source\repos\Project-calculis\ClientNew\bin\Debug\netcoreapp3.1\CommonLibrary.dll
+C:\Users\Миша\source\repos\Project-calculis\ClientNew\bin\Debug\netcoreapp3.1\CommonLibrary.pdb
+C:\Users\Миша\source\repos\Project-calculis\ClientNew\obj\Debug\netcoreapp3.1\Client.csproj.CopyComplete

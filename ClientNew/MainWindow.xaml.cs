@@ -32,13 +32,14 @@ namespace ClientApp
         {
             InitializeComponent();
 
-            notifyIcon.Icon = new System.Drawing.Icon("Main.ico");
-            notifyIcon.Visible = false;
+            //notifyIcon.Icon = new System.Drawing.Icon("Main.ico");
+            notifyIcon.Icon = new System.Drawing.Icon("warn.ico");
+            notifyIcon.Visible = true;
             notifyIcon.Click +=
                 delegate (object sender, EventArgs args)
                 {
-                    //this.Show();
-                    this.WindowState = WindowState.Normal;
+                    Show();
+                    WindowState = WindowState.Normal;
                 };
 
             DataContext = this;

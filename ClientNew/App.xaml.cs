@@ -17,21 +17,33 @@ namespace ClientApp
         App()
         {
             InitializeComponent();
+            //if (Environment.CommandLine.Contains("run"))
+            //{
+            //    App app = new App();
+            //    MainWindow window = new MainWindow();
+            //    app.Run(window);
+            //}
+            //else
+            //{
+            //    Process.Start("Updater.exe");
+            //}
         }
 
-        [STAThread]
-        static void Main(params string[] arguments)
+        private void OnStart(object sender, StartupEventArgs e)
         {
-            if (arguments.Contains("run"))
+            if (!Environment.CommandLine.Contains("run"))
             {
-                App app = new App();
-                MainWindow window = new MainWindow();
-                app.Run(window);
-            }
-            else
-            {
-                Process.Start("Updater.exe");
+                //Process.Start("Updater.exe");
+                //Shutdown();
             }
         }
+
+        //[STAThread]
+        //static void Main()
+        //{
+        //    ClientApp.App app = new ClientApp.App();
+        //    app.InitializeComponent();
+        //    app.Run();
+        //}
     }
 }
