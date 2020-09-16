@@ -3,10 +3,12 @@ using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace TestProgramm
 {
-    class Program
+    public class Program
     {
         /*
         [Serializable]
@@ -20,6 +22,39 @@ namespace TestProgramm
             }
         }
         */
+
+        [Serializable]
+        public class MyXMLSerializableClass
+        {
+            public string name;
+
+            public List<MyKVPair> data=new List<MyKVPair>();
+
+            public class MyKVPair
+            {
+                public string name;
+
+                public bool flag;
+
+                public MyKVPair() { Console.WriteLine("MyKVPair default ctor"); }
+
+                public MyKVPair(string name, bool flag)
+                {
+                    this.name = name;
+                    this.flag = flag;
+                    Console.WriteLine("MyKVPair parametrised ctor");
+                }
+            }
+
+            public void Display()
+            {
+                Console.WriteLine($"Name: {name}");
+                foreach(var item in data)
+                {
+                    Console.WriteLine($"\tName: {item.name}\n\tState: {item.flag}\n");
+                }
+            }
+        }
 
         static void Main(string[] args)
         {/*
@@ -69,6 +104,28 @@ namespace TestProgramm
             //Console.WriteLine("After export");
             //Console.ReadKey();
 
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(MyXMLSerializableClass));
+
+            MyXMLSerializableClass toSerialize = new MyXMLSerializableClass
+            {
+                name = "Unique name"//,
+                //data = new List<MyXMLSerializableClass.MyKVPair>()
+            };
+            toSerialize.data.Add(new MyXMLSerializableClass.MyKVPair("Param1", true));
+            toSerialize.data.Add(new MyXMLSerializableClass.MyKVPair("Param2", false));
+
+            using (FileStream fs = new FileStream("Test.xml", FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs, toSerialize);
+            }
+
+            MyXMLSerializableClass newPerson;
+            using (FileStream fs = new FileStream("Test.xml", FileMode.Open))
+            {
+                newPerson = (MyXMLSerializableClass)xmlSerializer.Deserialize(fs); //InvalidOperationExeption
+            }
+            newPerson.Display();
+            Console.Read();
         }
     }
 }

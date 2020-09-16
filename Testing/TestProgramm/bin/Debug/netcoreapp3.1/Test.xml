@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<MyXMLSerializableClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <name>Unique name</name>
+  <data>
+    <MyKVPair>
+      <name>Param1</name>
+      <flag>true</flag>
+    </MyKVPair>
+    <MyKVPair>
+      <name>Param2</name>
+      <flag>false</flag>
+    </MyKVPair>
+  </data>
+</MyXMLSerializableClass>

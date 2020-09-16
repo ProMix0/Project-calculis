@@ -30,3 +30,16 @@ C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\
 C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestLibrary.pdb
 C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csproj.CopyComplete
 C:\PABCWork.NET\Project of year\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.genruntimeconfig.cache
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.exe
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.deps.json
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.runtimeconfig.json
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.runtimeconfig.dev.json
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.dll
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\bin\Debug\netcoreapp3.1\TestProgramm.pdb
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csproj.CoreCompileInputs.cache
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.AssemblyInfoInputs.cache
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.AssemblyInfo.cs
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.dll
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.pdb
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.genruntimeconfig.cache
+C:\Users\Миша\source\repos\Project-calculis\Testing\TestProgramm\obj\Debug\netcoreapp3.1\TestProgramm.csprojAssemblyReference.cache

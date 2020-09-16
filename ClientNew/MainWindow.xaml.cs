@@ -1,4 +1,5 @@
-﻿using ClientApp;
+﻿using Client;
+using ClientApp;
 using CommonLibrary;
 using System;
 using System.Collections.Generic;
@@ -27,13 +28,14 @@ namespace ClientApp
 
         public ObservableCollection<MetaWork> MetaWorkItems { get; } = new ObservableCollection<MetaWork>();
         private System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
+        public ConfigurationManager Settings { get; } = ConfigurationManager.Load();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //notifyIcon.Icon = new System.Drawing.Icon("Main.ico");
-            notifyIcon.Icon = new System.Drawing.Icon("warn.ico");
+            notifyIcon.Icon = new System.Drawing.Icon("Ico.ico");
+            //notifyIcon.Icon = new System.Drawing.Icon("warn.ico");
             notifyIcon.Visible = true;
             notifyIcon.Click +=
                 delegate (object sender, EventArgs args)
@@ -46,7 +48,7 @@ namespace ClientApp
             listBox.SelectedIndex = 0;
             buttonsPanel.MouseLeftButtonDown += new MouseButtonEventHandler(LayoutRoot_MouseLeftButtonDown);
 
-            
+
 
             TestMethod();
         }
@@ -78,6 +80,7 @@ namespace ClientApp
 
         void CloseWindow(object sender, EventArgs e)
         {
+            Settings.Save();
             Close();
         }
 
